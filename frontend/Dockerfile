@@ -4,11 +4,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+ENV NODE_ENV=production
 RUN npm run build
 
 # Production stage
 FROM nginx:alpine
-
 # Create necessary directories and set permissions
 RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx && \
     chown -R nginx:nginx /var/cache/nginx /var/run /var/log/nginx
